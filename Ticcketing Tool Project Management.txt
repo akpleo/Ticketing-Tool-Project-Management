@@ -1,0 +1,622 @@
+1. User Login
+2. User & Role Management
+3. Project Management
+4. Ticket Creation
+5. Ticket Assignment
+6. Ticket Status
+7. Priority & Category
+8. Comments
+9. Attachments
+10. Ticket History
+11. Dashboard
+12. SLA
+13. Analysis Reports
+14. Email Notifications
+15. AI Integration / LLM to auto reply resolution of issues to users
+
+
+Frontend
+HTML + CSS + JavaScript + React
+              │
+              │ REST API / JSON
+              ▼
+Backend
+Python + Django + Django REST Framework
+              │
+              ▼
+Database
+PostgreSQL
+              │
+      ┌───────┴────────┐
+      │                │
+ Email Service      AI / LLM
+
+
+1. Authentication & Administration
+
+1. User Login
+
+Login/logout
+Forgot/reset password
+Session/JWT authentication
+Account activation/deactivation
+
+2. User & Role Management
+
+Admin
+Project Manager
+Support Engineer
+Developer
+End User
+Custom roles
+Module-level permissions
+
+End User
+├── Create Ticket
+├── View Own Tickets
+└── Add Comments
+
+Support Engineer
+├── View Assigned Tickets
+├── Update Tickets
+├── Add Resolution
+└── Reassign Tickets
+
+Manager
+├── View Team Tickets
+├── Assign Tickets
+├── Dashboard
+└── Reports
+
+Admin
+└── Full Access
+
+
+2. Project & Ticket Management
+3. Project Management
+
+Each project can contain:
+
+Project name/code
+Project manager
+Support team
+Developers
+Start/end dates
+Project status
+Tasks
+Tickets
+Documents
+
+
+
+4. Ticket Creation
+
+Users should provide:
+
+Ticket Number: INC-2026-000001
+Project: RiskTiger
+Subject: XIRR Report Download Issue
+Description: CSV download is failing...
+Category: Report
+Priority: High
+Attachment: screenshot.png
+
+The ticket number should be automatically generated.
+
+
+
+5. Ticket Assignment
+
+Tickets can be:
+
+Assigned manually
+Reassigned
+Assigned based on category/team
+Auto-assigned later
+
+
+
+6. Ticket Status
+
+I'd start with:
+
+Open
+  ↓
+Assigned
+  ↓
+In Progress
+  ↓
+Resolved
+  ↓
+Closed
+
+With branches such as:
+        ┌─→ On Hold
+In Progress
+        └─→ Pending User
+Also allow reopening when necessary.
+
+
+
+7. Priority & Category
+
+Priority :
+
+Critical
+High
+Medium
+Low
+
+Category examples:
+
+Application Issue
+Database Issue
+Server Issue
+Network Issue
+Report Issue
+Access Request
+Change Request
+Bug
+Enhancement
+Others
+
+
+3. Communication & Audit
+8. Comments
+
+Users and engineers can communicate inside the ticket.
+
+Support:
+
+Public comments
+Internal support notes
+Date/time
+Comment author
+
+
+
+9. Attachments
+
+Allow attachments such as:
+
+Screenshot
+PDF
+Logs
+Excel
+Text files
+
+Implement file-type and file-size restrictions for security.
+
+
+10. Ticket History
+
+This is extremely important for a support tool.
+
+Record every important change:
+
+01-Oct-2026 10:20
+Ticket created by Akshay
+
+01-Oct-2026 10:25
+Assigned: Unassigned → Engineer A
+
+01-Oct-2026 10:35
+Status: Open → In Progress
+
+01-Oct-2026 11:15
+Priority: Medium → High
+
+01-Oct-2026 13:30
+Status: In Progress → Resolved
+
+This gives you a proper audit trail.
+
+4. Dashboard, SLA & Reports
+11. Dashboard
+
+Create different dashboards based on role.
+
+Support Engineer
+
+My Open Tickets            14
+In Progress                 7
+Pending                      3
+Resolved Today               8
+SLA Breached                 2
+
+Manager
+
+Total Tickets              284
+Open                        42
+Critical                     3
+SLA Breached                11
+Closed This Month          156
+
+       Tickets by Status
+            📊
+
+       Tickets by Engineer
+            📊
+
+       Tickets by Category
+            📊
+			
+
+
+12. SLA
+
+Create SLA rules according to priority.
+
+For example, your organization might configure:
+
+Critical
+Response: 15 minutes
+Resolution: 2 hours
+
+High
+Response: 30 minutes
+Resolution: 4 hours
+
+Medium
+Response: 2 hours
+Resolution: 8 hours
+
+Low
+Response: 4 hours
+Resolution: 24 hours
+
+Track:
+
+Response SLA
+Resolution SLA
+SLA due time
+SLA remaining time
+Breach status
+Escalation
+Paused SLA when appropriate
+
+
+13. Analysis & Reports
+
+This can become one of the strongest parts of your application.
+
+Reports can include:
+
+Ticket reports
+Daily tickets
+Weekly tickets
+Monthly tickets
+Open vs closed
+Priority-wise
+Category-wise
+Project-wise
+User-wise
+Engineer-wise
+SLA reports
+SLA achieved %
+SLA breached %
+Average response time
+Average resolution time
+Project-wise SLA
+Engineer-wise SLA
+
+Trend Analysis
+
+Database Issues
+Jan ███████       78
+Feb █████████     94
+Mar ███████████  112
+Apr ████████████ 126
+
+This may tell the support manager that database-related incidents are increasing.
+
+You could export reports to:
+
+CSV
+Excel
+PDF
+
+
+
+14. Email Notifications
+
+Send emails when important events occur.
+
+For example:
+
+Ticket created
+
+Subject: Ticket INC-2026-000123 Created
+
+Hi Akshay,
+
+Your ticket has been created successfully.
+
+Ticket: INC-2026-000123
+Priority: High
+Status: Open
+
+You will be notified when the ticket is updated.
+
+Other events
+
+Send notifications when:
+
+Ticket Created
+Ticket Assigned
+Ticket Reassigned
+Status Changed
+Comment Added
+User Response Required
+SLA Near Breach
+SLA Breached
+Ticket Resolved
+Ticket Closed
+Ticket Reopened
+
+
+
+
+15. AI / LLM Integration ⭐
+
+This is where your system can become much more useful than a traditional ticketing application.
+
+However, I recommend implementing AI after the core ticketing system works properly.
+
+Initially, don't allow the AI to automatically close tickets or make production changes.
+
+User enters issue
+       ↓
+AI analyzes issue
+       ↓
+Search previous resolved tickets/
+knowledge articles
+       ↓
+Generate suggested solution
+       ↓
+Display:
+"Suggested Resolution"
+       ↓
+User tries solution
+     ↙     ↘
+ Worked    Didn't Work
+   ↓           ↓
+Resolved   Create/Continue Ticket
+
+User raises:
+
+XIRR report CSV columns are getting shifted when downloading the report.
+
+Suggested Solution
+
+A similar issue was previously reported.
+
+Possible Cause:
+City names containing commas may cause CSV fields
+to shift when values are not properly escaped.
+
+Previous Resolution:
+The CSV generation logic was updated to correctly
+handle values containing commas.
+
+Was this helpful?
+
+[Yes - Issue Resolved] [No - Continue Ticket]
+
+AI architecture I recommend
+
+Eventually you can build RAG (Retrieval-Augmented Generation) around your resolved tickets and approved knowledge articles.
+
+                 USER
+                   │
+                   ▼
+             React Frontend
+                   │
+                   ▼
+              Django API
+                   │
+          ┌────────┴────────┐
+          │                 │
+          ▼                 ▼
+     PostgreSQL          AI Service
+                              │
+                              ▼
+                       Search Knowledge
+                              │
+                    ┌─────────┴─────────┐
+                    ▼                   ▼
+             Resolved Tickets      Knowledge Base
+                    │                   │
+                    └─────────┬─────────┘
+                              ▼
+                            LLM
+                              │
+                              ▼
+                     Suggested Resolution
+					 
+Recommended Database Modules
+
+users
+roles
+permissions
+user_roles
+
+projects
+project_members
+
+tickets
+ticket_status
+ticket_priority
+ticket_categories
+ticket_assignments
+
+ticket_comments
+ticket_attachments
+ticket_history
+
+sla_policies
+sla_tracking
+sla_escalations
+
+notifications
+email_logs
+
+knowledge_articles
+
+ai_conversations
+ai_suggestions
+ai_feedback
+
+audit_logs
+
+
+Phase 1: Foundation
+
+PostgreSQL
+     ↓
+Django Setup
+     ↓
+Django REST Framework
+     ↓
+React Setup
+     ↓
+Login
+     ↓
+Users & Roles
+
+Phase 2: Core Ticketing
+
+Projects
+   ↓
+Create Ticket
+   ↓
+Assign Ticket
+   ↓
+Status
+   ↓
+Priority / Category
+   ↓
+Comments
+   ↓
+Attachments
+
+Phase 3: Support Management
+
+Ticket History
+      ↓
+Dashboard
+      ↓
+SLA
+      ↓
+Email Notifications
+
+
+Phase 4: Analytics
+
+Dashboard
+    ↓
+Reports
+    ↓
+Charts
+    ↓
+Trend Analysis
+    ↓
+Export
+
+Phase 5: AI
+
+Knowledge Base
+      ↓
+Historical Resolved Tickets
+      ↓
+Semantic Search
+      ↓
+LLM
+      ↓
+Suggested Resolution
+      ↓
+User Feedback
+
+PROJECT MANAGEMENT + TICKETING SYSTEM
+
+Frontend
+├── HTML
+├── CSS
+├── JavaScript
+└── React
+
+Backend
+├── Python
+├── Django
+└── Django REST Framework
+
+Database
+└── PostgreSQL
+
+AI
+├── LLM API
+├── RAG
+└── Knowledge Base
+
+Infrastructure
+├── Nginx
+├── Gunicorn
+├── Git
+└── New Relic
+
+Future
+├── Docker
+├── Redis
+├── Celery
+└── Microsoft Entra ID / SSO
+
+
+
+Frontend
+├── HTML5
+├── CSS3
+├── JavaScript
+├── React
+├── TypeScript          ← Recommended
+└── Material UI
+
+Backend
+├── Python
+├── Django
+└── Django REST Framework
+
+Database
+└── PostgreSQL
+
+Background Processing
+├── Redis
+└── Celery
+
+AI Layer
+├── LLM API
+├── RAG
+├── Knowledge Base
+└── pgvector
+
+Infrastructure
+├── Ubuntu Linux
+├── Docker
+├── Docker Compose
+├── Nginx
+└── Gunicorn
+
+DevOps
+├── Git
+├── GitHub / GitLab
+└── CI/CD
+
+Monitoring
+├── Prometheus
+├── Grafana
+└── Sentry
+
+Security
+├── HTTPS
+├── JWT / SSO
+├── RBAC
+└── Secrets Management
